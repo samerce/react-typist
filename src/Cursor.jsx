@@ -28,13 +28,14 @@ export default class Cursor extends Component {
     this._isReRenderingCursor = false;
     this.state = {
       shouldRender: this.props.show,
+      shouldHide: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     const shouldHide = !this.props.isDone && nextProps.isDone && this.props.hideWhenDone;
     if (shouldHide) {
-      setTimeout(() => this.setState({ shouldRender: false }), this.props.hideWhenDoneDelay);
+      setTimeout(() => this.setState({ shouldHide }), this.props.hideWhenDoneDelay);
     }
   }
 
@@ -71,8 +72,9 @@ export default class Cursor extends Component {
   render() {
     if (this.state.shouldRender) {
       const className = this.props.blink ? ' Cursor--blinking' : '';
+      const {shouldHide} = this.state;
       return (
-        <span className={`Cursor${className}`}>
+        <span className={`Cursor${className} ${shouldHide && ' Cursor--hideWhenDone'}`}>
           {this.props.element}
         </span>
       );
