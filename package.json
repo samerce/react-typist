@@ -1,5 +1,5 @@
 {
-  "name": "samerce/react-typist",
+  "name": "react-typist",
   "version": "2.0.5",
   "description": "Typing animations with React",
   "main": "dist/Typist.js",
